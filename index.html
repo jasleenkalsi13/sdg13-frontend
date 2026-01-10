@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SDG 13 – Climate Action</title>
+
+<style>
+/* ===== GLOBAL ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #a8e063, #56ab2f); /* CHANGED */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===== CARD ===== */
+.container {
+  background: #ffffff;
+  width: 380px;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== HEADINGS ===== */
+h1 {
+  text-align: center;
+  font-size: 22px;
+  color: #1b5e20; /* CHANGED */
+  margin-bottom: 10px;
+}
+
+p.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #4e4e4e;
+  margin-bottom: 25px;
+}
+
+/* ===== INPUTS ===== */
+label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2e7d32; /* CHANGED */
+}
+
+input {
+  width: 100%;
+  margin: 6px 0 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #c8e6c9; /* CHANGED */
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #388e3c; /* CHANGED */
+  box-shadow: 0 0 0 2px rgba(56, 142, 60, 0.18); /* CHANGED */
+}
+
+/* ===== BUTTON ===== */
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #388e3c, #1b5e20); /* CHANGED */
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(27, 94, 32, 0.4); /* CHANGED */
+}
+
+/* ===== RESULT ===== */
+.result {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #e8f5e9; /* CHANGED */
+  color: #1b5e20; /* CHANGED */
+  font-weight: bold;
+  text-align: center;
+  display: none;
+}
+
+/* ===== FOOTER NOTE ===== */
+.footer {
+  margin-top: 18px;
+  font-size: 11px;
+  text-align: center;
+  color: #2e7d32; /* CHANGED */
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Carbon Footprint Checker</h1>
+  <p class="subtitle">SDG 13 – Climate Action</p>
+
+  <label>Daily Transport Distance (km)</label>
+  <input type="number" id="transport" placeholder="e.g. 20">
+
+  <label>Monthly Electricity Usage (units)</label>
+  <input type="number" id="electricity" placeholder="e.g. 150">
+
+  <label>Meat-based Meals per Week</label>
+  <input type="number" id="meat" placeholder="e.g. 4">
+
+  <button onclick="checkImpact()">Check Impact</button>
+
+  <div class="result" id="result"></div>
+
+  <div class="footer">
+    Awareness tool only • Not a medical or scientific diagnosis
+  </div>
+</div>
+
+<script>
+async function checkImpact() {
+  const resultBox = document.getElementById("result");
+  resultBox.style.display = "block";
+  resultBox.style.background = "#fff8e1";
+  resultBox.style.color = "#8d6e63";
+  resultBox.innerText = "Connecting to backend...";
+
+  const payload = {
+    transport: Number(document.getElementById("transport").value),
+    electricity: Number(document.getElementById("electricity").value),
+    meat: Number(document.getElementById("meat").value)
+  };
+
+  try {
+    const response = await fetch(
+      "https://sdg13-backend.onrender.com/carbon",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }
+    );
+
+    const data = await response.json();
+
+    resultBox.style.background = "#e8f5e9";
+    resultBox.style.color = "#1b5e20";
+    resultBox.innerText =
+       Carbon Score: ${data.carbon_score}\nImpact Level: ${data.impact_level};
+
+  } catch (error) {
+    resultBox.style.background = "#ffebee";
+    resultBox.style.color = "#c62828";
+    resultBox.innerText = "Unable to connect to backend";
+    console.error("Backend error:", error);
+  }
+}
+</script>
+
+</body>
+</html>
