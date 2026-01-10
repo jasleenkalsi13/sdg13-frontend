@@ -136,14 +136,12 @@ button:hover {
 async function checkImpact() {
   const resultBox = document.getElementById("result");
   resultBox.style.display = "block";
-  resultBox.style.background = "#e1f5fe"; /* CHANGED */
-  resultBox.style.color = "#01579b"; /* CHANGED */
   resultBox.innerText = "Connecting to backend...";
 
   const payload = {
-    transport: Number(document.getElementById("transport").value),
-    electricity: Number(document.getElementById("electricity").value),
-    meat: Number(document.getElementById("meat").value)
+    transport: Number(document.getElementById("transport").value) || 0,
+    electricity: Number(document.getElementById("electricity").value) || 0,
+    meat: Number(document.getElementById("meat").value) || 0
   };
 
   try {
@@ -158,16 +156,12 @@ async function checkImpact() {
 
     const data = await response.json();
 
-    resultBox.style.background = "#e3f2fd"; /* CHANGED */
-    resultBox.style.color = "#0d47a1"; /* CHANGED */
     resultBox.innerText =
-      💙 Carbon Score: ${data.carbon_score}\nImpact Level: ${data.impact_level};
+      `💙 Carbon Score: ${data.carbon_score}\nImpact Level: ${data.impact_level}`;
 
   } catch (error) {
-    resultBox.style.background = "#bbdefb"; /* CHANGED */
-    resultBox.style.color = "#0d47a1"; /* CHANGED */
+    console.error(error);
     resultBox.innerText = "Unable to connect to backend";
-    console.error("Backend error:", error);
   }
 }
 </script>
