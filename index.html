@@ -127,7 +127,7 @@ async function checkImpact() {
     const data = await response.json();
 
     resultBox.innerText =
-      `💙 Carbon Score: ${data.carbon_score}
+      ` Carbon Score: ${data.carbon_score}
 Impact Level: ${data.impact_level}`;
 
   } catch (error) {
