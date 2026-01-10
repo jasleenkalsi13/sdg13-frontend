@@ -15,7 +15,7 @@
 
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #fbc2eb, #a6c1ee); /* CHANGED */
+  background: linear-gradient(135deg, #a8e063, #56ab2f); /* CHANGED */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,21 +27,21 @@ body {
   width: 380px;
   padding: 30px;
   border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(106, 27, 154, 0.25); /* CHANGED */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
 }
 
 /* ===== HEADINGS ===== */
 h1 {
   text-align: center;
   font-size: 22px;
-  color: #6a1b9a; /* CHANGED */
+  color: #1b5e20; /* CHANGED */
   margin-bottom: 10px;
 }
 
 p.subtitle {
   text-align: center;
   font-size: 14px;
-  color: #6d4c7d; /* CHANGED */
+  color: #4e4e4e;
   margin-bottom: 25px;
 }
 
@@ -49,7 +49,7 @@ p.subtitle {
 label {
   font-size: 13px;
   font-weight: 600;
-  color: #8e24aa; /* CHANGED */
+  color: #2e7d32; /* CHANGED */
 }
 
 input {
@@ -57,21 +57,21 @@ input {
   margin: 6px 0 16px;
   padding: 10px 12px;
   border-radius: 8px;
-  border: 1px solid #e1bee7; /* CHANGED */
+  border: 1px solid #c8e6c9; /* CHANGED */
   font-size: 14px;
 }
 
 input:focus {
   outline: none;
-  border-color: #9c27b0; /* CHANGED */
-  box-shadow: 0 0 0 2px rgba(156, 39, 176, 0.2); /* CHANGED */
+  border-color: #388e3c; /* CHANGED */
+  box-shadow: 0 0 0 2px rgba(56, 142, 60, 0.18); /* CHANGED */
 }
 
 /* ===== BUTTON ===== */
 button {
   width: 100%;
   padding: 12px;
-  background: linear-gradient(135deg, #ec407a, #8e24aa); /* CHANGED */
+  background: linear-gradient(135deg, #388e3c, #1b5e20); /* CHANGED */
   color: #ffffff;
   border: none;
   border-radius: 10px;
@@ -83,7 +83,7 @@ button {
 
 button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(142, 36, 170, 0.4); /* CHANGED */
+  box-shadow: 0 6px 15px rgba(27, 94, 32, 0.4); /* CHANGED */
 }
 
 /* ===== RESULT ===== */
@@ -91,8 +91,8 @@ button:hover {
   margin-top: 20px;
   padding: 14px;
   border-radius: 10px;
-  background: #f3e5f5; /* CHANGED */
-  color: #6a1b9a; /* CHANGED */
+  background: #e8f5e9; /* CHANGED */
+  color: #1b5e20; /* CHANGED */
   font-weight: bold;
   text-align: center;
   display: none;
@@ -103,7 +103,7 @@ button:hover {
   margin-top: 18px;
   font-size: 11px;
   text-align: center;
-  color: #8e24aa; /* CHANGED */
+  color: #2e7d32; /* CHANGED */
 }
 </style>
 </head>
@@ -136,8 +136,8 @@ button:hover {
 async function checkImpact() {
   const resultBox = document.getElementById("result");
   resultBox.style.display = "block";
-  resultBox.style.background = "#fce4ec"; /* CHANGED */
-  resultBox.style.color = "#ad1457"; /* CHANGED */
+  resultBox.style.background = "#fff8e1";
+  resultBox.style.color = "#8d6e63";
   resultBox.innerText = "Connecting to backend...";
 
   const payload = {
@@ -158,14 +158,14 @@ async function checkImpact() {
 
     const data = await response.json();
 
-    resultBox.style.background = "#f3e5f5"; /* CHANGED */
-    resultBox.style.color = "#6a1b9a"; /* CHANGED */
+    resultBox.style.background = "#e8f5e9";
+    resultBox.style.color = "#1b5e20";
     resultBox.innerText =
-       Carbon Score: ${data.carbon_score}\nImpact Level: ${data.impact_level};
+      🌱 Carbon Score: ${data.carbon_score}\nImpact Level: ${data.impact_level};
 
   } catch (error) {
-    resultBox.style.background = "#f8bbd0"; /* CHANGED */
-    resultBox.style.color = "#880e4f"; /* CHANGED */
+    resultBox.style.background = "#ffebee";
+    resultBox.style.color = "#c62828";
     resultBox.innerText = "Unable to connect to backend";
     console.error("Backend error:", error);
   }
