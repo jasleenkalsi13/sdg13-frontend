@@ -244,7 +244,7 @@ async function sendMessage(){
   addMessage("Thinking... 🤖","bot");
 
   try{
-    const res=await fetch("https://sdg13-backend.onrender.com/chat",{
+    const res=await fetch("https://sdg13-backend-7dac.onrender.com/chat",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({message:text})
